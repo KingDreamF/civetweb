@@ -19232,10 +19232,6 @@ mg_stop(struct mg_context *ctx)
 
 	mg_join_thread(mt);
 	free_context(ctx);
-
-#if defined(_WIN32)
-	(void)WSACleanup();
-#endif /* _WIN32 */
 }
 
 
@@ -19334,11 +19330,6 @@ static
 	    ((init != NULL) ? (init->configuration_options) : (NULL));
 
 	struct mg_workerTLS tls;
-
-#if defined(_WIN32)
-	WSADATA data;
-	WSAStartup(MAKEWORD(2, 2), &data);
-#endif /* _WIN32  */
 
 	if (error != NULL) {
 		error->code = 0;
